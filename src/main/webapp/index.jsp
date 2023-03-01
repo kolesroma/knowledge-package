@@ -9,11 +9,5 @@
     Home page
 </h1>
 
-delete kpac with id 8
-
-<form action="kpacs/1/delete" method="post">
-    <input type="submit" value="submit">
-</form>
-
 </body>
 </html>

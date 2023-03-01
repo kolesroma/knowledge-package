@@ -4,9 +4,11 @@ import com.aurosks.kolesnyk.entity.PackageEntity;
 import com.aurosks.kolesnyk.service.PackageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDate;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/kpacs")
@@ -26,8 +28,13 @@ public class PackageController {
 
     @PostMapping
     public String create(@ModelAttribute PackageEntity packageEntity) {
-        packageEntity.setCreatedAt(LocalDate.now());
         return "redirect:/kpacs?successCreateId=" + packageService.create(packageEntity);
+    }
+
+    @GetMapping
+    public String findALl(Model model) {
+        model.addAttribute("packages", packageService.findAll());
+        return "package/packagesGrid";
     }
 
     @PostMapping("/{id}/delete")
@@ -35,11 +42,4 @@ public class PackageController {
         packageService.deleteById(id);
         return "redirect:/kpacs?successDeleteId=" + id;
     }
-
-    @GetMapping
-    public String findALl(Model model) {
-        model.addAttribute("packages", packageService.findAll());
-        return "package/packages";
-    }
-
 }
