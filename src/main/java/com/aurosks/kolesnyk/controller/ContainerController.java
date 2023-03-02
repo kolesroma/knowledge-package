@@ -1,6 +1,7 @@
 package com.aurosks.kolesnyk.controller;
 
 import com.aurosks.kolesnyk.entity.ContainerEntity;
+import com.aurosks.kolesnyk.entity.PackageEntity;
 import com.aurosks.kolesnyk.service.ContainerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,8 +42,14 @@ public class ContainerController {
 
     @GetMapping("/set/{containerId}")
     public String findAll(Model model, @PathVariable Integer containerId) {
-        model.addAttribute("packages", containerService.findAllById(containerId));
-        return "package/packages"; // use another view
+        model.addAttribute("containerId", containerId);
+        return "container/subpackages";
+    }
+
+    @GetMapping("/set/{containerId}/json")
+    @ResponseBody
+    public List<PackageEntity> findAllJson(@PathVariable Integer containerId) {
+        return containerService.findAllById(containerId);
     }
 
     @PostMapping("/sets/{id}/delete")

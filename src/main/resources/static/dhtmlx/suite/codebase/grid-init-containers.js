@@ -25,6 +25,5 @@ const grid = new dhx.Grid("grid", {
 });
 
 grid.events.on("cellDblClick", function (row, column, e) {
-    const url = '/k_pac_test_task_war_exploded/set/' + row.id;
-    location.href = url;
+    location.href = '/k_pac_test_task_war_exploded/set/' + row.id;
 });
