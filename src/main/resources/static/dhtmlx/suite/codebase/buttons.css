@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.remove-button {
+    cursor: pointer;
+    color: red;
+}
+
+.add-row {
+    cursor: pointer;
+    color: blue;
+}

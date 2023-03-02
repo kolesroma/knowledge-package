@@ -2,10 +2,14 @@ package com.aurosks.kolesnyk.dao;
 
 import com.aurosks.kolesnyk.entity.ContainerEntity;
 import com.aurosks.kolesnyk.entity.PackageEntity;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -45,7 +49,9 @@ public class ContainerDaoImpl implements ContainerDao {
     @Override
     public List<PackageEntity> findAllById(Integer containerId) {
         String SQL = "select * from `package` join `package_container` `pc` on `package`.`id` = `pc`.`package_id` where `container_id` = ?";
-        return jdbcTemplate.query(SQL, PackageDaoImpl::packageEntityRowMapper, containerId);
+        return jdbcTemplate.query(SQL,
+                preparedStatement -> preparedStatement.setInt(1, containerId),
+                PackageDaoImpl::packageEntityRowMapper);
     }
 
 }

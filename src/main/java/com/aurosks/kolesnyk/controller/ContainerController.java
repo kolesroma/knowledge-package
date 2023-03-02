@@ -42,10 +42,10 @@ public class ContainerController {
     @GetMapping("/set/{containerId}")
     public String findAll(Model model, @PathVariable Integer containerId) {
         model.addAttribute("packages", containerService.findAllById(containerId));
-        return "package/packages";
+        return "package/packages"; // use another view
     }
 
-    @PostMapping("/{id}/delete")
+    @PostMapping("/sets/{id}/delete")
     public String delete(@PathVariable Integer id) {
         containerService.deleteById(id);
         return "redirect:/sets?successDeleteId=" + id;

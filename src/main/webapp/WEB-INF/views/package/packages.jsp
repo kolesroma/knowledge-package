@@ -4,38 +4,15 @@
 <!DOCTYPE html>
 <html lang="ua">
 <head>
-    <!-- meta block -->
-    <title>Initialization with config.data - DHTMLX Grid</title>
+    <title>Packages</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <script type="text/javascript" src="<c:url value="/static/dhtmlx/suite/codebase/suite.js"/>"></script>
+    <link rel="stylesheet" href="<c:url value="/static/dhtmlx/suite/codebase/suite.css"/>">
 
-    <script type="text/javascript" src="<c:url value="/static/dhtmlx/codebase/grid.js?v=8.0.0"/>"></script>
-    <link rel="stylesheet" href="<c:url value="/static/dhtmlx/codebase/grid.css?v=8.0.0"/>">
-
-    <link rel="stylesheet" href="<c:url value="/static/dhtmlx/samples/common/index.css?v=8.0.0"/>">
-    <!-- custom sample head -->
-    <script src="<c:url value="/static/dhtmlx/samples/common/data.js?v=8.0.0"/>"></script>
-    <style>
-        body {
-            margin: 0;
-        }
-
-        .action-buttons {
-            display: flex;
-            justify-content: space-evenly;
-            width: 100%;
-        }
-
-        .remove-button {
-            cursor: pointer;
-            color: red;
-        }
-
-        .add-row {
-            cursor: pointer;
-            color: blue;
-        }
-    </style>
+    <link rel="stylesheet" href="<c:url value="/static/dhtmlx/suite/codebase/index.css?v=8.0.0"/>">
+    <link rel="stylesheet" href="<c:url value="/static/dhtmlx/suite/codebase/buttons.css?v=8.0.0"/>">
+    <script defer type="text/javascript" src="<c:url value="/static/dhtmlx/suite/codebase/grid-init-packages.js"/>"></script>
 </head>
 <body>
 <header class="dhx_sample-header">
@@ -58,50 +35,20 @@
     <div style="height: 100%; width: 100%" id="grid"></div>
 </section>
 <script>
-    const grid = new dhx.Grid("grid", {
-        columns: [
-            {width: 100, id: "id", header: [{text: "Id"}]},
-            {width: 350, id: "title", header: [{text: "Title"}]},
-            {width: 348, id: "description", header: [{text: "Description"}]},
-            {width: 300, id: "createdAt", header: [{text: "Created at"}]},
-            {
-                id: "delete", width: 120, header: [{text: "Actions", align: "center"}],
-                htmlEnable: true, align: "center",
-                template: function () {
-                    return "<span class='action-buttons'><a class='remove-button'>Delete</a></span>"
-                }
-            }
-        ],
-        eventHandlers: {
-            onclick: {
-                "remove-button": function (e, data) {
-                    const url = 'kpacs/' + data.row.id + '/delete';
-                    let form = document.createElement('form');
-                    form.setAttribute('action', url);
-                    form.setAttribute('method', 'post');
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            }
+    const getJSON = async url => {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(response.statusText);
         }
-    });
-
-    let array = [];
-    let item;
-    <c:if test="${packages.size() != 0}">
-    <c:forEach begin="0" end="${packages.size() - 1}" varStatus="loop">
-    item = {
-        id: "${packages.get(loop.index).id}",
-        title: "${packages.get(loop.index).title}",
-        description: "${packages.get(loop.index).description}",
-        createdAt: "${packages.get(loop.index).createdAt}",
-        delete: "",
-    };
-    array.push(item);
-    </c:forEach>
-    grid.data.parse(array);
-    </c:if>
-
+        return response.json();
+    }
+    getJSON("/k_pac_test_task_war_exploded/kpacs/json")
+        .then(data => {
+            grid.data.parse(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
 </script>
 </body>
 </html>
