@@ -34,7 +34,7 @@ public class PackageController {
     @GetMapping
     public String findALl(Model model) {
         model.addAttribute("packages", packageService.findAll());
-        return "package/packagesGrid";
+        return "package/packages";
     }
 
     @PostMapping("/{id}/delete")
