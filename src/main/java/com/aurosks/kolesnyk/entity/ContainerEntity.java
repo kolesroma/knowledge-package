@@ -1,6 +1,5 @@
 package com.aurosks.kolesnyk.entity;
 
-
 public class ContainerEntity {
     private Integer id;
     private String title;
@@ -8,6 +7,9 @@ public class ContainerEntity {
     public ContainerEntity(Integer id, String title) {
         this.id = id;
         this.title = title;
+    }
+
+    public ContainerEntity() {
     }
 
     public Integer getId() {

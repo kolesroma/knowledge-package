@@ -9,19 +9,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
 
-    <link rel="shortcut icon" href="static/dhtmlx/samples/common/favicon/favicon.ico" type="image/x-icon"/>
-    <link rel="icon" href="static/dhtmlx/samples/common/favicon/icon-16.png" sizes="16x16"/>
-    <link rel="icon" href="static/dhtmlx/samples/common/favicon/icon-32.png" sizes="32x32"/>
-    <link rel="icon" href="static/dhtmlx/samples/common/favicon/icon-48.png" sizes="48x48"/>
-    <link rel="icon" href="static/dhtmlx/samples/common/favicon/icon-96.png" sizes="96x96"/>
-    <link rel="icon" href="static/dhtmlx/samples/common/favicon/icon-144.png" sizes="144x144"/>
-    <!-- end meta block -->
-    <script type="text/javascript" src="static/dhtmlx/codebase/grid.js?v=8.0.0"></script>
-    <link rel="stylesheet" href="static/dhtmlx/codebase/grid.css?v=8.0.0">
+    <script type="text/javascript" src="<c:url value="/static/dhtmlx/codebase/grid.js?v=8.0.0"/>"></script>
+    <link rel="stylesheet" href="<c:url value="/static/dhtmlx/codebase/grid.css?v=8.0.0"/>">
 
-    <link rel="stylesheet" href="static/dhtmlx/samples/common/index.css?v=8.0.0">
+    <link rel="stylesheet" href="<c:url value="/static/dhtmlx/samples/common/index.css?v=8.0.0"/>">
     <!-- custom sample head -->
-    <script src="static/dhtmlx/samples/common/data.js?v=8.0.0"></script>
+    <script src="<c:url value="/static/dhtmlx/samples/common/data.js?v=8.0.0"/>"></script>
     <style>
         body {
             margin: 0;

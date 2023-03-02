@@ -40,10 +40,10 @@ public class PackageDaoImpl implements PackageDao {
     @Override
     public List<PackageEntity> findAll() {
         String SQL = "select * from `package`";
-        return jdbcTemplate.query(SQL, this::packageEntityRowMapper);
+        return jdbcTemplate.query(SQL, PackageDaoImpl::packageEntityRowMapper);
     }
 
-    private PackageEntity packageEntityRowMapper(ResultSet resultSet, int row) {
+    protected static PackageEntity packageEntityRowMapper(ResultSet resultSet, int row) {
         try {
             return new PackageEntity(resultSet.getInt("id"),
                     resultSet.getString("title"),
