@@ -5,7 +5,7 @@ import com.aurosks.kolesnyk.entity.PackageEntity;
 import java.util.List;
 
 public interface PackageService {
-    Integer create(PackageEntity packageEntity);
+    PackageEntity create(PackageEntity packageEntity);
 
     List<PackageEntity> findAll();
 

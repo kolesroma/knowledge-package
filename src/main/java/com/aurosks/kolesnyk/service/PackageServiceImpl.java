@@ -16,9 +16,10 @@ public class PackageServiceImpl implements PackageService {
     }
 
     @Override
-    public Integer create(PackageEntity packageEntity) {
+    public PackageEntity create(PackageEntity packageEntity) {
         packageEntity.setCreatedAt(LocalDate.now());
-        return packageDao.create(packageEntity);
+        packageEntity.setId(packageDao.create(packageEntity));
+        return packageEntity;
     }
 
     @Override
