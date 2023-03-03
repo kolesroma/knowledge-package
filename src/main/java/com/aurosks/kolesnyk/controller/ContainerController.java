@@ -35,9 +35,6 @@ public class ContainerController {
         return containerService.create(containerEntity);
     }
 
-
-    // map with packages
-    // with ticks
     @PutMapping("/sets/{containerId}")
     @ResponseBody
     public void update(@RequestBody List<PackageEntity> packageEntities,
