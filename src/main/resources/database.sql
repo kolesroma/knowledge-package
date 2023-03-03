@@ -14,6 +14,11 @@ create table `container` (
 );
 
 create table `package_container` (
-    `package_id` int not null references `package`(`id`),
-    `container_id` int not null references `container`(`id`)
+    `package_id` int not null,
+    `container_id` int not null,
+    primary key (`package_id`, `container_id`),
+    constraint package_container_container_id_fk
+        foreign key (`container_id`) references `container`(`id`) on delete cascade,
+    constraint package_container_package_id_fk
+        foreign key (`package_id`) references `package`(`id`) on delete cascade
 );
