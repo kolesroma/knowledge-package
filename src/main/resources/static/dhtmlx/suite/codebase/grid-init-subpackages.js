@@ -13,8 +13,24 @@ const toolbarData = [
     }
 ];
 
+function getIdList() {
+    let idList = [];
+    let req = new XMLHttpRequest();
+    req.open('GET', "/k_pac_test_task_war_exploded/set/" + containerId + "/json", false);
+    req.onload = function () {
+        let response = req.response;
+        let json = JSON.parse(response);
+        json.forEach(item => {
+            idList.push(item.id);
+        });
+    }
+    req.send(null);
+    return idList;
+}
+
 function setCheckboxes() {
     let myArray = [];
+    const idList = getIdList();
     let req = new XMLHttpRequest();
     req.open('GET', "/k_pac_test_task_war_exploded/kpacs/json", false);
     req.onload = function () {
@@ -24,7 +40,8 @@ function setCheckboxes() {
             let obj = {
                 id: item.id,
                 type: "checkbox",
-                text: item["title"] + " [#" + item["id"] + "]"
+                text: item["title"] + " [#" + item["id"] + "]",
+                checked: idList.includes(item.id)
             };
             myArray.push(obj);
         });
