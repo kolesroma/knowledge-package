@@ -13,4 +13,6 @@ public interface ContainerService {
     List<PackageEntity> findAllById(Integer containerId);
 
     ContainerEntity create(ContainerEntity containerEntity);
+
+    void update(Integer containerId, List<PackageEntity> packageEntities);
 }

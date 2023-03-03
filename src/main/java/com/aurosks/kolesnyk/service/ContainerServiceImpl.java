@@ -35,4 +35,9 @@ public class ContainerServiceImpl implements ContainerService {
         containerEntity.setId(containerDao.create(containerEntity));
         return containerEntity;
     }
+
+    @Override
+    public void update(Integer containerId, List<PackageEntity> packageEntities) {
+        containerDao.update(containerId, packageEntities);
+    }
 }

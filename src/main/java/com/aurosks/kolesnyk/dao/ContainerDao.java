@@ -13,4 +13,6 @@ public interface ContainerDao {
     List<PackageEntity> findAllById(Integer containerId);
 
     Integer create(ContainerEntity containerEntity);
+
+    void update(Integer containerId, List<PackageEntity> packageEntities);
 }

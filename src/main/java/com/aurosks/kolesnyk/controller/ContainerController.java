@@ -5,11 +5,7 @@ import com.aurosks.kolesnyk.entity.PackageEntity;
 import com.aurosks.kolesnyk.service.ContainerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +38,12 @@ public class ContainerController {
 
     // map with packages
     // with ticks
+    @PutMapping("/sets/{containerId}")
+    @ResponseBody
+    public void update(@RequestBody List<PackageEntity> packageEntities,
+                       @PathVariable Integer containerId) {
+        containerService.update(containerId, packageEntities);
+    }
 
     @GetMapping("/set/{containerId}")
     public String findAll(Model model, @PathVariable Integer containerId) {
