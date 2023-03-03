@@ -10,8 +10,11 @@ import java.time.LocalDate;
 
 public class PackageEntity {
     private Integer id;
+
     private String title;
+
     private String description;
+
     @JsonFormat(pattern = "dd-MM-yyyy")
     @JsonSerialize(using = LocalDateSerializer.class)
     @JsonDeserialize(using = LocalDateDeserializer.class)

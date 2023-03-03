@@ -29,4 +29,10 @@ public class ContainerServiceImpl implements ContainerService {
     public List<PackageEntity> findAllById(Integer containerId) {
         return containerDao.findAllById(containerId);
     }
+
+    @Override
+    public ContainerEntity create(ContainerEntity containerEntity) {
+        containerEntity.setId(containerDao.create(containerEntity));
+        return containerEntity;
+    }
 }

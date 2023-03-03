@@ -6,13 +6,13 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ContainerDaoImpl implements ContainerDao {
@@ -54,4 +54,17 @@ public class ContainerDaoImpl implements ContainerDao {
                 PackageDaoImpl::packageEntityRowMapper);
     }
 
+    @Override
+    public Integer create(ContainerEntity containerEntity) {
+        String SQL = "insert into `container` (`title`) values(?)";
+        var keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(connection -> {
+            var preparedStatement = connection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setString(1, containerEntity.getTitle());
+            return preparedStatement;
+        }, keyHolder);
+        return Optional.ofNullable(keyHolder.getKey())
+                .orElseThrow()
+                .intValue();
+    }
 }

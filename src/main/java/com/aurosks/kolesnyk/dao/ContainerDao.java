@@ -11,4 +11,6 @@ public interface ContainerDao {
     void deleteById(Integer id);
 
     List<PackageEntity> findAllById(Integer containerId);
+
+    Integer create(ContainerEntity containerEntity);
 }

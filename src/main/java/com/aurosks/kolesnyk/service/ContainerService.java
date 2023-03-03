@@ -11,4 +11,6 @@ public interface ContainerService {
     void deleteById(Integer id);
 
     List<PackageEntity> findAllById(Integer containerId);
+
+    ContainerEntity create(ContainerEntity containerEntity);
 }
